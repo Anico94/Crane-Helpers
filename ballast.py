@@ -17,18 +17,27 @@ class CalculateBallast:
 
         leg_actions = [compression45, tension45,neutral45, compression90, tension90]
 
-
         return leg_actions
 
 crane_1 = CalculateBallast(14100, 2360, 5)
 
-df = pd.DataFrame({"A": [crane_1.leg_actions()[3],crane_1.leg_actions()[2]],
-"B": [crane_1.leg_actions()[3],crane_1.leg_actions()[0]],
-"C": [crane_1.leg_actions()[1],crane_1.leg_actions()[2]],
-"D": [crane_1.leg_actions()[1],crane_1.leg_actions()[4]]
-}, index = [0,45])
+class TableData:
+    def __init__(self, list_actions):
+        self.list_actions = list_actions
 
-print(df)
+    def buildTable(self):
+        df = pd.DataFrame({"A": [self.list_actions[3],self.list_actions[2]],
+        "B": [self.list_actions[3],self.list_actions[0]],
+        "C": [self.list_actions[1],self.list_actions[2]],
+        "D": [self.list_actions[1],self.list_actions[4]]
+        }, index = [0,45])
+        return df
+
+
+
+reaction_table = TableData(crane_1.leg_actions()).buildTable()
+
+print(reaction_table)
 
 class ReactionTable:
     def __init__(self, compression, tension, neutral):
