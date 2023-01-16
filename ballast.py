@@ -19,19 +19,23 @@ class CalculateBallast:
 
         return leg_actions
 
-crane_1 = CalculateBallast(14100, 2360, 5)
+crane_1 = CalculateBallast(4200, 955, 1.98)
 
 class TableData:
     def __init__(self, list_actions):
         self.list_actions = list_actions
 
+    ## attempted getting mutliple heading in the dataframe but haven't worked it out yet. 
+    
     def buildTable(self):
-        df = pd.DataFrame({"A": [self.list_actions[3],self.list_actions[2]],
-        "B": [self.list_actions[3],self.list_actions[0]],
-        "C": [self.list_actions[1],self.list_actions[2]],
-        "D": [self.list_actions[1],self.list_actions[4]]
-        }, index = [0,45])
+        header = pd.MultiIndex.from_product([['Fz','Fz','Fz','Fz']])
+        df = pd.DataFrame([self.list_actions[3],self.list_actions[2]],
+        [self.list_actions[3],self.list_actions[0]],
+        [self.list_actions[1],self.list_actions[2]],
+        [self.list_actions[1],self.list_actions[4]]
+        , index = [0,45], columns = header)
         return df
+
 
 
 
